@@ -1,0 +1,43 @@
+[package]
+name = "chameloon-space"
+version = "0.1.0"
+edition = "2021"
+description = "Server SDK for Chameloon spaces: serve space folders, sync, device auth and bots."
+license = "MIT"
+repository = "https://github.com/Chameloon-Labs/space-rust"
+readme = "README.md"
+keywords = ["chameloon", "sync", "server"]
+categories = ["web-programming"]
+
+[lib]
+name = "chameloon_space"
+
+[[bin]]
+name = "chameloon-serve"
+path = "src/main.rs"
+required-features = ["serve"]
+
+[[example]]
+name = "conformance"
+required-features = ["serve"]
+
+[features]
+default = ["serve"]
+# The small bundled HTTP server and the chameloon-serve CLI. The core `Server` needs no web framework.
+serve = ["dep:tiny_http"]
+tiny_http = ["dep:tiny_http"]
+
+[dependencies]
+base64 = "0.23.1"
+getrandom = "0.4.3"
+http = "1.5.0"
+indexmap = { version = "2.14.2", features = ["serde"] }
+p256 = { version = "0.14.0", features = ["ecdsa"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = { version = "1.0.154", features = ["preserve_order"] }
+sha2 = "0.11.1"
+tiny_http = { version = "0.12.0", optional = true }
+
+[dev-dependencies]
+base64 = "0.23.1"
+
